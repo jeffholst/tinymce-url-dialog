@@ -18,7 +18,7 @@ initializeParent = () => {
         text: "Open Plugin", // Name of button displayed on toolbar
         // open URL Dialog when button clicked
         onAction: function () {
-          let url = "/plugin.html"; // The URL of the external page to open
+          let url = "plugin.html"; // The URL of the external page to open
           const instanceApi = editor.windowManager.openUrl({
             // Create URL dialog and assign instance API
             title: "Plugin", // Title of modal dialog
