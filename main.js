@@ -1,9 +1,16 @@
 // HTML DOM Ids
+const targetOrigin = "https://jeffholst.github.io"; // required URI for target Origin
+const allowDebugOrigin = false; // allow debugging from localhost or 127.0.01
 const parentTinyMCEId = "parentTinyMCE"; // parent TinyMCE element
 const pluginTextAreaId = "pluginTextArea"; // plugin textarea for get/set TinyMCE content
 const pluginEventListId = "pluginEventList"; // plugin <ul> updated when messages received
 const parentEventListId = "parentEventList"; // parent <ul> updated when messages received
 
+/* match one of the following to be true
+  - http(s)://localhost (case insensitive)
+  - http(s)://127.0.0.1 (case insensitive) */
+const regex = /http[s]?:\/\/(127.0.0.1|localhost)/i
+  
 initializeParent = () => {
   // Initialize the parent page
 
@@ -60,6 +67,11 @@ initializePlugin = () => {
 
   // Event Listener added for messages received from parent
   window.addEventListener("message", function (event) {
+    if (!isValidTargetOrigin(event.origin)) {
+      alert(`Invalid origin '${event.origin}'. Expecting origin '${targetOrigin}'`);
+      return
+    }
+
     var data = event.data; // Contains message from parent
     // make sure data is not empty and is for TinyMCE
     if (data && data.type && data.type === "tinymce") {
@@ -70,6 +82,22 @@ initializePlugin = () => {
     }
   });
 };
+
+isValidTargetOrigin = (origin) => {
+  if (origin === targetOrigin || (allowDebugOrigin && origin.match(regex))) return true
+
+  return false
+}
+
+function getTargetOrigin() {
+  debugger
+  
+  // return wilcard(*) if debug on and testing locally
+  if (allowDebugOrigin && window.location.origin.match(regex)) return "*"
+
+  // since we're not testing locally, return required origin
+  return targetOrigin
+}
 
 setTextArea = (id, val) => {
   // Set the value of specified textarea
@@ -93,8 +121,7 @@ sendMessage = (action) => {
       mceAction: "customAction",
       message: { action: action, content: content },
     },
-    "*" /* in production do not use wildcard ('*')
-        set to target origin and make sure event.origin matches */
+    getTargetOrigin()
   );
 };
 
