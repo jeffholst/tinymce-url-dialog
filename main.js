@@ -64,7 +64,7 @@ initializePlugin = () => {
     // make sure data is not empty and is for TinyMCE
     if (data && data.type && data.type === "tinymce") {
       // Update the plugin <ul>
-      updateList(pluginEventListId, "Received Message:");
+      updateList(pluginEventListId, "Received Message");
       // Set the plugin textarea with the TinyMCE content from parent
       setTextArea(pluginTextAreaId, data.message);
     }
