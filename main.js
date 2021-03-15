@@ -23,13 +23,13 @@ initializeParent = () => {
       // Add button to toolbar for URL Dialog
       editor.ui.registry.addButton("OpenDialog", {
         // Create 'OpenDialog' button
-        text: "Open Plugin", // Name of button displayed on toolbar
+        text: "Open URL Dialog", // Name of button displayed on toolbar
         // open URL Dialog when button clicked
         onAction: function () {
           let url = "plugin.html"; // The URL of the external page to open
           const instanceApi = editor.windowManager.openUrl({
             // Create URL dialog and assign instance API
-            title: "Plugin", // Title of modal dialog
+            title: "URL Dialog", // Title of modal dialog
             url: url, // The URL to open
             width: 500, // width of modal dialog
             height: 550, // height of modal dialog

@@ -17,9 +17,11 @@
 
 <body>
     <div class="container mt-3">
-        <div class="alert alert-primary" role="alert">
-            <strong>Instructions</strong>: 
-            click the buttons to post messages to the parent window. 
+        <div class="alert alert-info" role="alert">
+            This UI component is loaded from an external web page.  URL dialogs such as this are useful for complex
+            cases where the standard TinyMCE dialogs cannot be used.
+            <br><br>
+            The buttons below demonstrate 2-way communication between this dialog and the parent window. 
         </div>
         <button type="button" class="btn btn-primary" onclick="sendMessage('GetContent')">Get TinyMCE Content</button>
         <button type="button" class="btn btn-primary" onclick="sendMessage('SetContent')">Set TinyMCE Content</button>
