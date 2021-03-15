@@ -1,6 +1,7 @@
+const allowDebugOrigin = true; // allow debugging from localhost or 127.0.01
+const targetOrigin = "https://jeffholst.github.ios"; // production URI for event auth
+
 // HTML DOM Ids
-const targetOrigin = "https://jeffholst.github.io"; // required URI for target Origin
-const allowDebugOrigin = false; // allow debugging from localhost or 127.0.01
 const parentTinyMCEId = "parentTinyMCE"; // parent TinyMCE element
 const pluginTextAreaId = "pluginTextArea"; // plugin textarea for get/set TinyMCE content
 const pluginEventListId = "pluginEventList"; // plugin <ul> updated when messages received
@@ -90,8 +91,6 @@ isValidTargetOrigin = (origin) => {
 }
 
 function getTargetOrigin() {
-  debugger
-  
   // return wilcard(*) if debug on and testing locally
   if (allowDebugOrigin && window.location.origin.match(regex)) return "*"
 
@@ -116,6 +115,7 @@ sendMessage = (action) => {
   const content = action === "SetContent" ? getTextArea(pluginTextAreaId) : "";
 
   // Post messasge to parent
+  // fails silently if domain orgins do not match
   window.parent.postMessage(
     {
       mceAction: "customAction",
