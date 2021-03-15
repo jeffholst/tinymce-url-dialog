@@ -1,5 +1,5 @@
 const allowDebugOrigin = true; // allow debugging from localhost or 127.0.01
-const targetOrigin = "https://jeffholst.github.ios"; // production URI for event auth
+const targetOrigin = "https://jeffholst.github.io"; // production URI for event auth
 
 // HTML DOM Ids
 const parentTinyMCEId = "parentTinyMCE"; // parent TinyMCE element
