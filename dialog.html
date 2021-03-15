@@ -11,7 +11,7 @@
     <script src="main.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script>
-        initializePlugin()
+        initializeDialog()
     </script>
 </head>
 
@@ -26,10 +26,10 @@
         <button type="button" class="btn btn-primary" onclick="sendMessage('GetContent')">Get TinyMCE Content</button>
         <button type="button" class="btn btn-primary" onclick="sendMessage('SetContent')">Set TinyMCE Content</button>
         <h6 class="text-muted mt-3">TextArea</h6>
-        <textarea class="form-control mt-3" id="pluginTextArea" rows="3"></textarea>
+        <textarea class="form-control mt-3" id="dialogTextArea" rows="3"></textarea>
         <div class="text-muted mt-3">
             <h6>Events</h6>
-            <ul id="pluginEventList"></ul>
+            <ul id="dialogEventList"></ul>
         </div>
 </body>
 
