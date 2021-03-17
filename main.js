@@ -1,5 +1,5 @@
 const allowDebugOrigin = true; // allow debugging from localhost or 127.0.01
-const targetOrigin = "https://jeffholst.github.io"; // production URI for event auth
+const targetOrigin = "https://jeffholst.github.io"; // external URL dialog URL
 
 // HTML DOM Ids
 const parentTinyMCEId = "parentTinyMCE"; // parent TinyMCE element
@@ -71,6 +71,7 @@ initializeDialog = () => {
 
   // Event Listener added for messages received from parent
   window.addEventListener("message", function (event) {
+    // Make sure event originated from trusted origin
     if (!isValidTargetOrigin(event.origin)) {
       alert(
         `Invalid origin '${event.origin}'. Expecting origin '${targetOrigin}'`
@@ -79,7 +80,7 @@ initializeDialog = () => {
     }
 
     var data = event.data; // Contains message from parent
-    // make sure data is not empty and is for TinyMCE
+    // Make sure data is not empty and is for TinyMCE
     if (data && data.type && data.type === "tinymce") {
       // Update the dialog <ul>
       updateList(dialogEventListId, "Received Message");
@@ -90,9 +91,12 @@ initializeDialog = () => {
 };
 
 isValidTargetOrigin = (origin) => {
+  // origin must match (const targetOrigin) or
+  // (const allowDebugOrigin === true) AND origin matches localhost/127.0.0.1 regex
   if (origin === targetOrigin || (allowDebugOrigin && origin.match(regex)))
     return true;
 
+  // origin not valid
   return false;
 };
 
@@ -120,7 +124,7 @@ sendMessage = (action) => {
   // During 'SetContent' action, content will be updated otherwise it will be blank
   const content = action === "SetContent" ? getTextArea(dialogTextAreaId) : "";
 
-  // Post messasge to parent
+  // Post message to parent
   // fails silently if domain orgins do not match
   window.parent.postMessage(
     {
