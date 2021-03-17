@@ -19,7 +19,7 @@ cd tinymce-url-dialog
 
 Then open index.html in a browser.
 
-## Demo Walktrhough
+## Demo Walkthrough
 
 1) open the **index.html** file in a web browser
 1) click the **Open URL Dialog** button in the TinyMCE toolbar to open a new dialog window
